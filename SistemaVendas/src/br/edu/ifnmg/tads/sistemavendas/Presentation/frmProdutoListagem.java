@@ -64,6 +64,9 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
         tblListagem = new javax.swing.JTable();
         txtFiltro = new javax.swing.JTextField();
 
+        setClosable(true);
+        setMaximizable(true);
+
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +125,7 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,7 +163,6 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblListagemMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnNovo;
     private javax.swing.JScrollPane jScrollPane1;

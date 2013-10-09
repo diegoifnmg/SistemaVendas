@@ -34,7 +34,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
     private void carregaCampos() {
         lblId.setText(Integer.toString(pessoa.getCodigo()));
         txtNome.setText(pessoa.getNome());
-        //txtDataNasc.setText(pessoa.getDataNascimento());
+        txtDataNasc.setText(String.valueOf(pessoa.getDataNascimento()));
     }
 
     private void carregaObjeto() {
