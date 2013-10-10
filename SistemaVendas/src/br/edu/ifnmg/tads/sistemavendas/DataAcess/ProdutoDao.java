@@ -20,11 +20,11 @@ import java.util.logging.Logger;
  *
  * @author Diego
  */
-public class ProdutoDAO extends DAO {
+public class ProdutoDao extends DAO {
 
     private DAO bd;
 
-    public ProdutoDAO() {
+    public ProdutoDao() {
         super();
         bd = new DAO();
     }
@@ -183,7 +183,7 @@ public class ProdutoDAO extends DAO {
 
                     tmp.setPreco(resultado.getDouble("Preco"));
                 } catch (Exception ex) {
-                    Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 // Pega o objeto e coloca na lista
@@ -191,7 +191,7 @@ public class ProdutoDAO extends DAO {
             }
             return produtos;
         } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

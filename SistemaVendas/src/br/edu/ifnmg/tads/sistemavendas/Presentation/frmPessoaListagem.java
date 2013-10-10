@@ -4,7 +4,7 @@
  */
 package br.edu.ifnmg.tads.sistemavendas.Presentation;
 
-import br.edu.ifnmg.tads.sistemavendas.DataAcess.PessoaDAO;
+import br.edu.ifnmg.tads.sistemavendas.DataAcess.PessoaDao;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Pessoa;
 import java.util.List;
 import java.util.Vector;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmPessoaListagem extends javax.swing.JInternalFrame {
 
-    PessoaDAO dao;
+    PessoaDao dao;
     
     /**
      * Creates new form frmPessoaListagem
@@ -26,7 +26,7 @@ public class frmPessoaListagem extends javax.swing.JInternalFrame {
     public frmPessoaListagem() {
         initComponents();
         
-        dao = new PessoaDAO();
+        dao = new PessoaDao();
 
         List<Pessoa> pessoas = dao.ListarTodos();
 
@@ -137,8 +137,9 @@ public class frmPessoaListagem extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-
-        frmPessoaCadastrar janela = new frmPessoaCadastrar();
+        Pessoa p = new Pessoa();
+        PessoaDao d = new PessoaDao();
+        frmPessoaEditar janela = new frmPessoaEditar(p, d);
         this.getParent().add(janela);
         janela.setVisible(true);
         this.setVisible(false);

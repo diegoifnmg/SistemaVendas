@@ -23,11 +23,11 @@ import java.util.logging.Logger;
  *
  * @author Diego
  */
-public class PessoaDAO extends DAO {
+public class PessoaDao extends DAO {
 
     private DAO bd;
     
-    public PessoaDAO() {
+    public PessoaDao() {
         super();
         bd = new DAO();
     }
@@ -270,7 +270,7 @@ public class PessoaDAO extends DAO {
                     tmp.setNome(resultado.getString("nome"));
                     tmp.setDataNascimento(resultado.getDate("DataNascimento"));
                 } catch (Exception ex) {
-                    Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 // Pega o objeto e coloca na lista
@@ -278,7 +278,7 @@ public class PessoaDAO extends DAO {
             }
             return produtos;
         } catch (SQLException ex) {
-            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

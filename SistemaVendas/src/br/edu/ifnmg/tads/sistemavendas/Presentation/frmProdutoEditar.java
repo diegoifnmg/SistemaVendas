@@ -4,7 +4,7 @@
  */
 package br.edu.ifnmg.tads.sistemavendas.Presentation;
 
-import br.edu.ifnmg.tads.sistemavendas.DataAcess.ProdutoDAO;
+import br.edu.ifnmg.tads.sistemavendas.DataAcess.ProdutoDao;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Produto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,18 +17,23 @@ import javax.swing.JOptionPane;
 public class frmProdutoEditar extends javax.swing.JInternalFrame {
 
     Produto produto;
-    ProdutoDAO dao;
+    ProdutoDao dao;
     
     /**
      * Creates new form frmProdutoEditar
      */
-    public frmProdutoEditar(Produto p, ProdutoDAO d) {
+    public frmProdutoEditar(Produto p, ProdutoDao d) {
         initComponents();
-        
-        this.produto = p;
-        this.dao = d;
+        if(p.getCodigo() > 0){
+            this.produto = p;
+            this.dao = d;
 
-        carregaCampos();
+            carregaCampos();
+  
+        }else{
+            produto = new Produto();
+            dao = new ProdutoDao();
+        }
     }
     
     private void carregaCampos() {

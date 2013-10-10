@@ -4,7 +4,7 @@
  */
 package br.edu.ifnmg.tads.sistemavendas.Presentation;
 
-import br.edu.ifnmg.tads.sistemavendas.DataAcess.ProdutoDAO;
+import br.edu.ifnmg.tads.sistemavendas.DataAcess.ProdutoDao;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Produto;
 import java.util.List;
 import java.util.Vector;
@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmProdutoListagem extends javax.swing.JInternalFrame {
 
-    ProdutoDAO dao;
+    ProdutoDao dao;
     
     /**
      * Creates new form frmProdutoListagem
@@ -26,7 +26,7 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
     public frmProdutoListagem() {
         initComponents();
         
-        dao = new ProdutoDAO();
+        dao = new ProdutoDao();
 
         List<Produto> produtos = dao.ListarTodos();
 
@@ -145,8 +145,9 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnBuscar1ActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-
-        frmProdutoCadastro janela = new frmProdutoCadastro();
+        Produto p = new Produto();
+        ProdutoDao d = new ProdutoDao();
+        frmProdutoEditar janela = new frmProdutoEditar(p,d);
         this.getParent().add(janela);
         janela.setVisible(true);
         this.setVisible(false);
