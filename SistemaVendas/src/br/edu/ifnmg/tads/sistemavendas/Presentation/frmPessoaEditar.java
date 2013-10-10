@@ -6,10 +6,14 @@ package br.edu.ifnmg.tads.sistemavendas.Presentation;
 
 import br.edu.ifnmg.tads.sistemavendas.DataAcess.PessoaDao;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Pessoa;
+import br.edu.ifnmg.tads.sistemavendas.DomainModel.Telefone;
 import java.sql.Date;
+import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -52,6 +56,9 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         }
 
     }
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,9 +85,10 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblListagemTelefones = new javax.swing.JTable();
+        btnAdicionar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         setClosable(true);
@@ -179,7 +187,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Telefone:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListagemTelefones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -190,7 +198,14 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblListagemTelefones);
+
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -204,7 +219,9 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAdicionar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,15 +231,16 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdicionar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("Telefone", jPanel3);
@@ -306,7 +324,53 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnApagarActionPerformed
 
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        try{
+            if(JOptionPane.showConfirmDialog(rootPane, "Deseja adicionar o Telefone?") == 0)
+            {
+                Telefone t = new Telefone();
+                //t.setDDD( (byte) Integer.parseInt( txtDDD.getText() ));
+                //t.setOperadora((byte) Integer.parseInt( txtOperadora.getText() ));
+                t.setTelefone(Integer.parseInt( txtTelefone.getText() ));
+                
+                pessoa.addTelefone(t);
+                
+                atualizaTabelaTelefones(pessoa.getTelefones());
+                
+                JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso!");
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Operação Cancelada");
+            }            
+        }
+        catch(Exception ex){
+            JOptionPane.showMessageDialog(rootPane, "Erro! " + ex.getMessage());
+        }        
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void atualizaTabelaTelefones(List<Telefone> telefones)
+    {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("DDD");
+        model.addColumn("Operadora");
+        model.addColumn("Telefone");
+        
+        
+        for (Telefone t : telefones){
+            Vector valores = new Vector();
+            //valores.add(0,t.getDDD());
+            //valores.add(1,t.getOperadora());
+            valores.add(0,t.getTelefone());
+            
+            model.addRow(valores);            
+        }
+        
+        tblListagemTelefones.setModel(model);
+        tblListagemTelefones.repaint();         
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
@@ -317,15 +381,15 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblDataNasc;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdCampo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JTabbedPane pnlGuias;
+    private javax.swing.JTable tblListagemTelefones;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
