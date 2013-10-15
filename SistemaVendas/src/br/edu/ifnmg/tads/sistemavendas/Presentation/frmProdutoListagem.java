@@ -65,7 +65,10 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
         txtFiltro = new javax.swing.JTextField();
 
         setClosable(true);
+        setForeground(new java.awt.Color(255, 255, 255));
         setMaximizable(true);
+        setTitle("Produtos");
+        setToolTipText("");
 
         btnBuscar1.setText("Buscar");
         btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +128,7 @@ public class frmProdutoListagem extends javax.swing.JInternalFrame {
                     .addComponent(btnNovo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();

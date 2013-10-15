@@ -33,11 +33,13 @@ public class Principal extends javax.swing.JFrame {
         mnuPessoaCadastro = new javax.swing.JMenuItem();
         mnuProdutoCadastro = new javax.swing.JMenuItem();
         mnuRelatorio = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         mnuArquivo.setText("Arquivo");
 
+        mnuSairSistema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Sair.fw.png"))); // NOI18N
         mnuSairSistema.setText("Sair");
         mnuSairSistema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
 
         mnuCadastro.setText("Cadastro");
 
+        mnuPessoaCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/cadastroPessoas.fw.png"))); // NOI18N
         mnuPessoaCadastro.setText("Pessoa");
         mnuPessoaCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,6 +61,7 @@ public class Principal extends javax.swing.JFrame {
         });
         mnuCadastro.add(mnuPessoaCadastro);
 
+        mnuProdutoCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/CadastroProduto.fw.png"))); // NOI18N
         mnuProdutoCadastro.setText("Produto");
         mnuProdutoCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +73,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(mnuCadastro);
 
         mnuRelatorio.setText("Relatório");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Relatorio.fw.png"))); // NOI18N
+        jMenuItem1.setText("Vendas");
+        mnuRelatorio.add(jMenuItem1);
+
         jMenuBar1.add(mnuRelatorio);
 
         setJMenuBar(jMenuBar1);
@@ -139,6 +148,7 @@ public class Principal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenu mnuCadastro;
     private javax.swing.JMenuItem mnuPessoaCadastro;

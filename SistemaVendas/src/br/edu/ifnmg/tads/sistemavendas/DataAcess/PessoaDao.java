@@ -152,6 +152,32 @@ public class PessoaDao extends DAO {
             return null;
         }
     }
+    
+    public List<Telefone> ListarTodosTelefones() {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from Telefone");
+
+            ResultSet resultado = sql.executeQuery();
+
+            List<Telefone> lista = new ArrayList<Telefone>();
+
+            while (resultado.next()) {
+                Telefone obj = new Telefone();
+
+                obj.setCodigo(resultado.getInt("codTelefone"));
+                obj.setTelefone(resultado.getInt("telefone"));
+                
+
+                lista.add(obj);
+            }
+
+            return lista;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
 
     // Salvar Email 
     private void SalvarEmail(Pessoa pessoa, Email obj) {

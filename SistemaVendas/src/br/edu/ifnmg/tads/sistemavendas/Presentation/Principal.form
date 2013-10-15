@@ -11,6 +11,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuSairSistema">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/Sair.fw.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
               <Events>
@@ -26,6 +29,9 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuPessoaCadastro">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/cadastroPessoas.fw.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Pessoa"/>
               </Properties>
               <Events>
@@ -34,6 +40,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuProdutoCadastro">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/CadastroProduto.fw.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Produto"/>
               </Properties>
               <Events>
@@ -46,6 +55,16 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rio"/>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Imagens/Relatorio.fw.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Vendas"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
