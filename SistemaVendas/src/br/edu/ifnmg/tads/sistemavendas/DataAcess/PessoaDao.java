@@ -75,6 +75,20 @@ public class PessoaDao extends DAO {
                 sql.setDate(2, new java.sql.Date(obj.getDataNascimento().getTime()));
                 sql.setInt(3, obj.getCodigo());
                 sql.executeUpdate();
+                
+                // Salva o email
+                for (Email e : obj.getEmails()) {
+                    SalvarEmail(obj, e);
+                }
+                //Salva o Endereco 
+                for (Endereco e : obj.getEnderecos()) {
+                    SalvarEndereco(obj, e);
+                }
+                // Salva o Telefone 
+                for (Telefone e : obj.getTelefones()) {
+                    SalvarTelefone(obj, e);
+                }
+
                 return true;
 
             } catch (Exception ex) {
@@ -117,6 +131,10 @@ public class PessoaDao extends DAO {
                 obj.setNome(resultado.getString("Nome"));
                 obj.setDataNascimento(resultado.getDate("DataNascimento"));
 
+                AbrirTelefones(obj);
+                //AbrirEmails(obj);
+                //AbrirEnderecos(obj);
+                
                 return obj;
             } else {
                 return null;
@@ -168,6 +186,34 @@ public class PessoaDao extends DAO {
                 obj.setTelefone(resultado.getInt("telefone"));
                 
 
+                lista.add(obj);
+            }
+
+            return lista;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    public List<Endereco> ListarTodosEnderecos() {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from Enderecos");
+
+            ResultSet resultado = sql.executeQuery();
+
+            List<Endereco> lista = new ArrayList<Endereco>();
+
+            while (resultado.next()) {
+                Endereco obj = new Endereco();
+
+                obj.setCodigo(resultado.getInt("codEndereco"));
+                obj.setBairro(resultado.getString("bairro"));
+                obj.setCidade(resultado.getString("cidade"));
+                obj.setCep(resultado.getString("cep"));
+                obj.setRua(resultado.getString("rua"));
+                obj.setNumero(resultado.getInt("numero"));
+                
                 lista.add(obj);
             }
 
@@ -285,7 +331,7 @@ public class PessoaDao extends DAO {
 
             ResultSet resultado = comando.executeQuery(sql);
             // Cria uma lista de produtos vazia
-            List<Pessoa> produtos = new LinkedList<>();
+            List<Pessoa> pessoas = new LinkedList<>();
             while (resultado.next()) {
                 // Inicializa um objeto de produto vazio
                 Pessoa tmp = new Pessoa();
@@ -300,12 +346,74 @@ public class PessoaDao extends DAO {
                 }
 
                 // Pega o objeto e coloca na lista
-                produtos.add(tmp);
+                pessoas.add(tmp);
             }
-            return produtos;
+            return pessoas;
         } catch (SQLException ex) {
             Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
+    public void AbrirTelefones(Pessoa pessoa) {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from telefones where CodPessoa=?");
+            sql.setInt(1, pessoa.getCodigo());
+
+            ResultSet resultado = sql.executeQuery();
+
+            while (resultado.next()) {
+                pessoa.addTelefone(AbreTelefone(resultado));
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    private Telefone AbreTelefone(ResultSet resultado) {
+        Telefone tel = new Telefone();
+        try {
+            tel.setCodigo(resultado.getInt("codTelefone"));
+            //tel.setDDD(resultado.getByte("DDD"));
+            //tel.setOperadora(resultado.getByte("operadora"));
+            tel.setTelefone(resultado.getInt("telefone"));
+            return tel;
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+    
+    public void AbrirEnderecos(Pessoa pessoa) {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from enderecos where CodPessoa=?");
+            sql.setInt(1, pessoa.getCodigo());
+
+            ResultSet resultado = sql.executeQuery();
+
+            while (resultado.next()) {
+                pessoa.addEndereco(AbreEndereco(resultado));
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    private Endereco AbreEndereco(ResultSet resultado) {
+        Endereco end = new Endereco();
+        try {
+            end.setCodigo(resultado.getInt("codEndereco"));
+            end.setBairro(resultado.getString("bairro"));
+            end.setCep(resultado.getString("cep"));
+            end.setCidade(resultado.getString("cidade"));
+            end.setNumero(resultado.getInt("numero"));
+            end.setRua(resultado.getString("rua"));
+            
+            return end;
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+   
 }

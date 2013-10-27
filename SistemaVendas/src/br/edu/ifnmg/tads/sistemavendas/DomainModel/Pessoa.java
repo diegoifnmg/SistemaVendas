@@ -157,4 +157,11 @@ public class Pessoa {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return  nome ;
+    }
+    
+    
 }
