@@ -5,6 +5,7 @@
 package br.edu.ifnmg.tads.sistemavendas.Presentation;
 
 import br.edu.ifnmg.tads.sistemavendas.DataAcess.PessoaDao;
+import br.edu.ifnmg.tads.sistemavendas.DomainModel.Email;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Endereco;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Pessoa;
 import br.edu.ifnmg.tads.sistemavendas.DomainModel.Telefone;
@@ -40,11 +41,11 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
             List<Telefone> telefones = pessoa.getTelefones();
             atualizaTabelaTelefones(telefones);
             
-            List<Endereco> endereco = pessoa.getEnderecos();
-            atualizaTabelaEnderecos(endereco);
+            List<Endereco> enderecos = pessoa.getEnderecos();
+            atualizaTabelaEnderecos(enderecos);
             
-
-            
+            List<Email> emails = pessoa.getEmails();
+            atualizaTabelaEmails(emails);   
             
             
         } else {
@@ -113,11 +114,11 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         tblListagemTelefones = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        btnEmailAdd = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblEmailListagem = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox();
 
@@ -195,7 +196,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDataNasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDataNasc))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("Dados Gerais", jPanel1);
@@ -289,7 +290,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                     .addComponent(Adicionar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("Endereço", jPanel2);
@@ -357,16 +358,21 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                     .addComponent(btnAdicionar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("Telefone", jPanel3);
 
-        jLabel9.setText("Email:");
+        lblEmail.setText("Email:");
 
-        jButton1.setText("Adicionar");
+        btnEmailAdd.setText("Adicionar");
+        btnEmailAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmailAddActionPerformed(evt);
+            }
+        });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmailListagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -377,7 +383,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable2);
+        jScrollPane3.setViewportView(tblEmailListagem);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -388,11 +394,11 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
+                        .addComponent(lblEmail)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
-                        .addComponent(jButton1)
+                        .addComponent(btnEmailAdd)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -402,17 +408,22 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1))
-                    .addComponent(jLabel9))
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnEmailAdd))
+                    .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("Email", jPanel4);
 
         jComboBox1.setEditable(true);
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
         jComboBox1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jComboBox1KeyPressed(evt);
@@ -436,7 +447,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
 
         pnlGuias.addTab("tab5", jPanel5);
@@ -463,7 +474,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(pnlGuias)
+                .addComponent(pnlGuias, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
@@ -595,6 +606,32 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_AdicionarActionPerformed
 
+    private void btnEmailAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmailAddActionPerformed
+        try {
+            if (JOptionPane.showConfirmDialog(rootPane, "Deseja adicionar o Email?") == 0) {
+                Email e = new Email();
+                //t.setDDD( (byte) Integer.parseInt( txtDDD.getText() ));
+                //t.setOperadora((byte) Integer.parseInt( txtOperadora.getText() ));
+                e.setEmail(txtEmail.getText());
+                
+
+                pessoa.addEmail(e);
+
+                atualizaTabelaEmails(pessoa.getEmails());
+
+                JOptionPane.showMessageDialog(rootPane, "Salvo com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Operação Cancelada");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(rootPane, "Erro! " + ex.getMessage());
+        }
+    }//GEN-LAST:event_btnEmailAddActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     private void atualizaTabelaTelefones(List<Telefone> telefones) {
         DefaultTableModel model = new DefaultTableModel();
         //model.addColumn("DDD");
@@ -642,16 +679,36 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
         tblListagemEnderecos.setModel(model);
         tblListagemEnderecos.repaint();
     }
+    
+    
+    private void atualizaTabelaEmails(List<Email> emails) {
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("email");
+
+
+
+        for (Email t : emails) {
+            Vector valores = new Vector();
+            
+            valores.add(0, t.getEmail());
+            
+   
+            model.addRow(valores);
+        }
+
+        tblEmailListagem.setModel(model);
+        tblEmailListagem.repaint();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Adicionar;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnEmailAdd;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -660,19 +717,19 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCEP;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblDDD;
     private javax.swing.JLabel lblDataNasc;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblIdCampo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblRua;
     private javax.swing.JTabbedPane pnlGuias;
+    private javax.swing.JTable tblEmailListagem;
     private javax.swing.JTable tblListagemEnderecos;
     private javax.swing.JTable tblListagemTelefones;
     private javax.swing.JTextField txtBairro;
@@ -680,6 +737,7 @@ public class frmPessoaEditar extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtDDD;
     private javax.swing.JTextField txtDataNasc;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRua;

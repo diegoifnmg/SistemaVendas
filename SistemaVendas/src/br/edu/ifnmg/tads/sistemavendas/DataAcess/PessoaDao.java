@@ -132,8 +132,8 @@ public class PessoaDao extends DAO {
                 obj.setDataNascimento(resultado.getDate("DataNascimento"));
 
                 AbrirTelefones(obj);
-                //AbrirEmails(obj);
-                //AbrirEnderecos(obj);
+                AbrirEmails(obj);
+                AbrirEnderecos(obj);
                 
                 return obj;
             } else {
@@ -225,6 +225,31 @@ public class PessoaDao extends DAO {
     }
     
 
+    public List<Endereco> ListarTodosEmais() {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from Emails");
+
+            ResultSet resultado = sql.executeQuery();
+
+            List<Endereco> lista = new ArrayList<Endereco>();
+
+            while (resultado.next()) {
+                Endereco obj = new Endereco();
+
+                obj.setCodigo(resultado.getInt("codEmail"));
+                obj.setBairro(resultado.getString("Email"));
+                
+                lista.add(obj);
+            }
+
+            return lista;
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return null;
+        }
+    }
+    
+    
     // Salvar Email 
     private void SalvarEmail(Pessoa pessoa, Email obj) {
         if (obj.getCodigo() == 0) {
@@ -416,4 +441,33 @@ public class PessoaDao extends DAO {
 
     }
    
+    public void AbrirEmails(Pessoa pessoa) {
+        try {
+            PreparedStatement sql = getConexao().prepareStatement("select * from emails where CodPessoa=?");
+            sql.setInt(1, pessoa.getCodigo());
+
+            ResultSet resultado = sql.executeQuery();
+
+            while (resultado.next()) {
+                pessoa.addEmail(AbreEmail(resultado));
+            }
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    private Email AbreEmail(ResultSet resultado) {
+        Email ema = new Email();
+        try {
+            ema.setCodigo(resultado.getInt("codEmail"));
+            ema.setEmail(resultado.getString("email"));
+            
+            return ema;
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDao.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+
+    }
+    
 }
