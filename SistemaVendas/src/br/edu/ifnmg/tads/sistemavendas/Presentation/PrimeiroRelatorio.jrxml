@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8c8e5859-259b-4eb4-83f1-b1280be9ec0d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pessoa.`codPessoa` AS pessoa_codPessoa,
+     pessoa.`nome` AS pessoa_nome,
+     pessoa.`DataNascimento` AS pessoa_DataNascimento
+FROM
+     `pessoa` pessoa]]>
+	</queryString>
+	<field name="pessoa_nome" class="java.lang.String"/>
+	<group name="pessoa_nome">
+		<groupExpression><![CDATA[$F{pessoa_nome}]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<staticText>
+					<reportElement uuid="ce7e6288-69ef-46a2-a0ac-0669079719f2" mode="Opaque" x="0" y="0" width="100" height="24" forecolor="#666666" backcolor="#E6E6E6"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<text><![CDATA[Nome:]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="3b822cc1-d634-4742-8514-09ca5471911c" mode="Opaque" x="100" y="0" width="455" height="24" forecolor="#006699" backcolor="#E6E6E6"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{pessoa_nome}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement uuid="26f2721b-ecb1-4d7a-86a9-d94a2e2b5f7f" x="-20" y="23" width="595" height="1" forecolor="#666666"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement uuid="f797699d-3fe8-4490-a78f-6834ce008b24" mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
+				<staticText>
+					<reportElement uuid="b5c1abfa-633b-43cf-beea-eb751f0cd19f" x="20" y="20" width="275" height="43" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Sistema Vendas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="64cff90f-ca2b-417c-b06f-346d50197a24" x="395" y="43" width="180" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatório de Pessoas]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="41">
+			<line>
+				<reportElement uuid="0da583c9-006d-417e-9a14-398246d32dff" x="-20" y="40" width="595" height="1" forecolor="#666666"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="1">
+			<line>
+				<reportElement uuid="f95a8dd2-b991-46b4-83b4-b8050edb4368" positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="82">
+			<textField>
+				<reportElement uuid="e90fd47c-fbbf-4e39-aa1d-766cac97827f" mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="8560bd14-3f09-467a-bdd0-fcab4dd48f81" mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="9887a29c-e6d2-45d1-b777-e416cd244627" x="0" y="4" width="100" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
